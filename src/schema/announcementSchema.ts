@@ -13,12 +13,12 @@ const announcementSchema = new Schema({
   },
   title: {
     type: String,
-    require: true,
+    required: true,
     default: '暂无公告'
   },
   content: {
     type: String,
-    require: true,
+    required: true,
     default: '暂无公告，请留意后续消息'
   },
   extend: {

@@ -78,6 +78,29 @@ router.post('/login', async (req: Request, res: Response) => {
   }
 })
 
+// 小程序后台管理系统登录，简易死数据校验
+router.post('/adminLogin', async (req: Request, res: Response) => {
+  const body = req.body
+
+  const adminInfo = {
+    username: 'admin',
+    password: '123456'
+  }
+
+  if (adminInfo.username === body.username && adminInfo.password === body.password) {
+    const token = createToken({
+      ...adminInfo
+    })
+    res.status(200).json(
+      ResultJSON.SUCCESS({
+        token
+      })
+    )
+  } else {
+    res.status(500).json(ResultJSON.SERVER_ERROR())
+  }
+})
+
 // 注册接口
 router.post('/regist', async (req: Request, res: Response) => {
   const body = req.body

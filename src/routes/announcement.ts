@@ -46,6 +46,7 @@ router.get('/getAnnouncements', async (req: Request, res: Response) => {
   }
 })
 
+// 删除公告消息
 router.get('/delAnnouncement', async (req: Request, res: Response) => {
   try {
     await Announcement.deleteOne({

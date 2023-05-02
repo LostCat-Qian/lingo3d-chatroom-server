@@ -17,10 +17,13 @@ router.get('/', function (req: Request, res: Response, next: NextFunction) {
 // 推送新公告
 router.post('/addNewAnnouncement', async (req: Request, res: Response) => {
   const body = req.body
-  console.log(body)
 
   if (body.title === '') {
     res.status(400).json(ResultJSON.BAD_REQUEST('参数 title 未填写'))
+  }
+
+  if (body.content === '') {
+    res.status(400).json(ResultJSON.BAD_REQUEST('参数 content 未填写'))
   }
 
   try {

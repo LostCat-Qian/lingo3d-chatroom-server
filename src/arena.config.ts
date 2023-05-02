@@ -54,7 +54,7 @@ export default Arena({
     nms.run()
 
     // 设置路由白名单
-    const whiteList = ['/user/login', '/user/adminLogin']
+    const whiteList = ['/user/login', '/user/adminLogin', '/map/getCurrentMap', '/announcement/getAnnouncements']
     // 全局拦截除白名单以外的请求
     app.use((req: Request, res: Response, next: NextFunction) => {
       if (!whiteList.includes(req.url)) {

@@ -105,7 +105,6 @@ router.post('/adminLogin', async (req: Request, res: Response) => {
 router.post('/regist', async (req: Request, res: Response) => {
   const body = req.body
   console.log(body)
-
   if (body.username === '' || body.password === '' || body.nickname === '') {
     return res.status(400).json(ResultJSON.BAD_REQUEST())
   }
@@ -136,7 +135,7 @@ router.post('/regist', async (req: Request, res: Response) => {
       })
     )
   } catch (err) {
-    res.status(400).json(ResultJSON.BAD_REQUEST())
+    res.status(500).json(ResultJSON.SERVER_ERROR())
   }
 })
 

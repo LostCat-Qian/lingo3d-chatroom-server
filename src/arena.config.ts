@@ -1,6 +1,7 @@
 import Arena from '@colyseus/arena'
 import { monitor } from '@colyseus/monitor'
 import { MyRoom } from './rooms/MyRoom'
+import { matchMaker } from 'colyseus'
 import { NextFunction, Request, Response } from 'express'
 import { verifyToken } from './utils/tokenUtil'
 import ResultJSON from './utils/ResultJSON'
@@ -35,7 +36,8 @@ import mapRouter from './routes/map'
 export default Arena({
   getId: () => 'Your Colyseus App',
 
-  initializeGameServer: (gameServer) => {
+  initializeGameServer: async (gameServer) => {
+    gameServer.define('private_room', MyRoom)
     gameServer.define('my_room', MyRoom)
   },
 
@@ -54,7 +56,7 @@ export default Arena({
     nms.run()
 
     // 设置路由白名单
-    const whiteList = ['/user/login', '/user/adminLogin', '/map/getCurrentMap', '/announcement/getAnnouncements']
+    const whiteList = ['/user/login', '/user/regist', '/user/adminLogin', '/map/getCurrentMap', '/announcement/getAnnouncements']
     // 全局拦截除白名单以外的请求
     app.use((req: Request, res: Response, next: NextFunction) => {
       if (!whiteList.includes(req.url)) {

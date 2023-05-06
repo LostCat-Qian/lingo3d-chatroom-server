@@ -2,8 +2,9 @@ import { Room, Client } from 'colyseus'
 import { MyRoomState, Player } from './schema/MyRoomState'
 
 export class MyRoom extends Room<MyRoomState> {
-  public onCreate(options: any) {
-    this.setState(new MyRoomState())
+  public onCreate(options?: any) {
+    const roomState = new MyRoomState()
+    this.setState(roomState)
 
     this.onMessage('updatePlayer', (client, data) => {
       const player = this.state.players.get(client.sessionId)
